@@ -27,19 +27,34 @@ function fibsRec(n) {
 
 console.log(fibsRec(8));
 
-function checkSorted(arr) {
-  for (let i = 0; i < arr.length - 1; i++) {
-    if (arr[i] > arr[i + 1]) {
-      return false;
-    }
-  }
-  return true;
-}
-
 function mergeSort(array = []) {
   if (array.length === 1) return array;
+
+  let array1 = array.slice(0, parseInt(array.length / 2));
+  let array2 = array.slice(parseInt(array.length / 2), parseInt(array.length));
+
+  console.log("first: " + array1);
+  console.log("Second: " + array2);
+
+  let newSortedArray = [];
+  while (true) {
+    let firstIndex = 0;
+    let secondIndex = 0;
+
+    if (mergeSort(array1)[firstIndex] < mergeSort(array2)[secondIndex]) {
+      newSortedArray.push(mergeSort(array1)[firstIndex]);
+      firstIndex += 1;
+    } else {
+      newSortedArray.push(mergeSort(array2)[secondIndex]);
+    }
+  }
+
+  console.log("=========" + mergeSort(array1) + mergeSort(array2));
   return array;
 }
 
 let myArray = [3, 2, 1, 13, 8, 5, 0, 1];
-console.log(mergeSort(myArray));
+// let myArray = [3, 2]
+// console.log(mergeSort(myArray));
+
+mergeSort(myArray);
